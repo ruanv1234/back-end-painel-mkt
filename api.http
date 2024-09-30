@@ -1,0 +1,83 @@
+@contentType = application/json
+@baseUrl = http://localhost:3000
+
+# @name login
+POST {{baseUrl}}/api/auth/login HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "email": "ruanvictorfake22@gmail.com",
+    "password": "123456"
+}
+
+### create user
+POST {{baseUrl}}/api/users
+Content-Type: {{contentType}}
+
+{
+    "name": "ruan",
+    "email": "ruanvictorfake22@gmail.com",
+    "password": "123456"
+}
+   
+###
+                          #
+@token = {{login.response.body.access_token}}
+### create app
+POST {{baseUrl}}/api/apps HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+    "nomeApp": "App teste 1",
+    "urlLogo": "https://bay-bet.vercel.app/logo.png",
+    "linkCassino": "",
+    "linkCheckout": "https://pay.kirvano.com/7747fce8-2659-4685-acba-da800582f55a",
+    "linkTwitch": "https://twitch.tv",
+    "linkComunidade": "www.google.com",
+    "color": "#c0f205",
+    "lives": true,
+    "tutorial": true,
+    "bonus": true
+}
+
+### GET APPS
+GET {{baseUrl}}/api/apps
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+### 
+GET {{baseUrl}}/api/apps/183a8764-d490-44d8-94ea-e1d7f8568036
+Content-Type: {{contentType}}
+
+### 
+GET {{baseUrl}}/api/users
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+
+### 
+GET {{baseUrl}}/api/auth/me
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/apps/all
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+###
+POST {{baseUrl}}/api/notifications
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+    "title": "Notificação de testes",
+    "text": "teste",
+    "vista": false 
+}
+
+###
+GET {{baseUrl}}/api/notifications
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
